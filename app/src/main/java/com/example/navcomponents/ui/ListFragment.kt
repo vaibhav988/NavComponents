@@ -18,23 +18,14 @@ import com.example.navcomponents.viewmodel.NewsViewModel
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [list_fragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class
 ListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
       private lateinit var binding : FragmentListFragmentBinding
     override fun onCreateView(
@@ -43,7 +34,6 @@ ListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentListFragmentBinding.inflate(LayoutInflater.from(requireContext()), container , false)
-
         return binding.root.rootView
     }
 
@@ -51,23 +41,18 @@ ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val navController : NavController = Navigation.findNavController(view)
-//        binding.text.setOnClickListener(
-//            {
-//                navController.navigate(R.id.action_listFragment_to_detailFragment)
-//            }
-//        )
+        val viewModel  = NewsViewModel()
+        val adapter  =  NewsListAdapter(requireContext() , navController)
 
-         val viewModel : NewsViewModel = NewsViewModel()
-         val adapter : NewsPageAdapter =  NewsPageAdapter(requireContext() , navController)
-         binding.recycler.apply {
-             this.adapter = adapter
-             this.layoutManager = LinearLayoutManager(requireContext())
-         }
+        binding.recycler.apply {
+            this.adapter = adapter
+            this.layoutManager = LinearLayoutManager(requireContext())
+        }
+
         viewModel.fetchHeadlines("in")
         viewModel.listArticles.observe(viewLifecycleOwner){
             adapter.submitList(it)
         }
-
     }
 
 }

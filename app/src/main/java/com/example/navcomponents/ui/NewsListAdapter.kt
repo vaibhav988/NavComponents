@@ -15,10 +15,10 @@ import com.example.navcomponents.R
 import com.example.navcomponents.data.Articles
 import com.example.navcomponents.databinding.ItemlayoutBinding
 
-class NewsPageAdapter(val context: Context ,  navcontroller : NavController) : ListAdapter< Articles , NewsPageAdapter.ItemViewholder>(
+class NewsListAdapter(val context: Context ,  navcontroller : NavController) : ListAdapter< Articles , NewsListAdapter.ItemViewholder>(
     DiffCallback()
 ) {
-    val navController = navcontroller
+    private val navController = navcontroller
 
     lateinit var binding : ItemlayoutBinding
 
@@ -35,7 +35,6 @@ class NewsPageAdapter(val context: Context ,  navcontroller : NavController) : L
              holder.itemView.setOnClickListener(
              {
                  navController.navigate(R.id.action_listFragment_to_detailFragment , bundle)
-
              }
         )
     }

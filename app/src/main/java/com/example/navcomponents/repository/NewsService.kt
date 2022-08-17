@@ -5,7 +5,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface newsService {
+interface NewsService {
 
      @GET("everything")
      suspend fun getNews(@Query("page")  page : Int ,@Query("pageSize") pageSize : Int  ,

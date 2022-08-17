@@ -11,19 +11,13 @@ import kotlinx.coroutines.launch
 
 class NewsViewModel : ViewModel() {
 
-//    fun fetchNewsViaPaging() : LiveData<PagingData<Articles>> {
-//        return Pager(
-//            config = PagingConfig(10 , maxSize = 100),
-//            pagingSourceFactory = { PagingDataSource() }
-//        ).liveData.cachedIn(viewModelScope)
-//    }
-     var listArticles = MutableLiveData<List<Articles>>()
+
+    var listArticles = MutableLiveData<List<Articles>>()
     fun fetchHeadlines(str : String) {
         viewModelScope.launch {
             listArticles.postValue(NewsRepository.getHeadlines(str))
 
         }
-
     }
 
 }
